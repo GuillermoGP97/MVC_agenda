@@ -1,0 +1,150 @@
+﻿@model MVC_agenda.Models.AgendaMuestra
+@{
+    ViewBag.Title = "Home Page";
+}
+<br />
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Cambiar fecha</button>
+<label style="color:black">28/01/2020</label>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel"style="color:black">Calendario</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color:black">
+                Hola
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Cambiar fecha</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <br />
+    <div class="col-md-1" style="background-color:antiquewhite;color:black">
+        <div class="row horas">Hora</div>
+        @foreach (var elemento in Model.horas)
+        {
+            <div class="row horas">
+                @elemento.horastr
+            </div>
+        }
+    </div>
+    <div class="col-md-11" style="background-color:fuchsia;">
+        <div class="@Model.classcolumna">
+            a
+        </div>
+        <div class="@Model.classcolumna">
+            a
+        </div>
+        @for (var i = 1; i <= Model.ncolumnas; i++)
+        {
+            var listado = Model.columna1;
+            var estilo = "background-color:brown;color:white";
+            switch (i)
+            {
+                case 2:
+                    listado = Model.columna2;
+                    estilo = "background-color:cadetblue;color:white";
+                    break;
+                case 3:
+                    listado = Model.columna3;
+                    estilo = "background-color:darkgray;color:white";
+                    break;
+                case 4:
+                    listado = Model.columna4;
+                    estilo = "background-color:darkgray;color:white";
+                    break;
+                default:
+                    listado = Model.columna1;
+                    estilo = "background-color:brown;color:white";
+                    break;
+
+            }
+            listado = Model.listadecolumnas[i - 1];
+            <div class="@Model.classcolumna" style="@estilo">
+                @foreach (var elemento in listado)
+                {
+                    if (elemento.objcalse != "ocupada")
+                    {
+                        <div class="row @elemento.objcalse" style="height:@elemento.objalto">
+                            @elemento.tramtamiento
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+
+    @*<div class="@Model.classcolumna" style="background-color:brown;color:white">
+            @foreach (var elemento in Model.columna1)
+        {
+            if (elemento.objcalse != "ocupada")
+            {
+                    <div class="row @elemento.objcalse" style="height:@elemento.objalto">
+                        @elemento.tramtamiento
+                    </div>
+                }
+            }
+        </div>
+        <div class="@Model.classcolumna" style="background-color:cadetblue;color:white">
+            @foreach (var elemento in Model.columna2)
+        {
+            if (elemento.objcalse != "ocupada")
+            {
+                    <div class="row @elemento.objcalse" style="height:@elemento.objalto">
+                        @elemento.tramtamiento
+                    </div>
+                }
+            }
+        </div>
+        <div class="@Model.classcolumna" style="background-color:cadetblue;color:white">
+            @foreach (var elemento in Model.columna3)
+        {
+            if (elemento.objcalse != "ocupada")
+            {
+                    <div class="row @elemento.objcalse" style="height:@elemento.objalto">
+                        @elemento.tramtamiento
+                    </div>
+                }
+            }
+        </div>
+        <div class="@Model.classcolumna" style="background-color:darkgray;color:white">
+            @foreach (var elemento in Model.columna4)
+        {
+            if (elemento.objcalse != "ocupada")
+            {
+                    <div class="row @elemento.objcalse" style="height:@elemento.objalto">
+                        @elemento.tramtamiento
+                    </div>
+                }
+            }
+        </div>*@
+</div>
+<div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    </div>
+</div>
